@@ -3,7 +3,6 @@
 local json = require 'jsonc'
 local uci = require('simple-uci').cursor()
 local ddutil = require 'ffda-domain-director'
-local location = require 'ffda-location'
 
 
 -- Saves target domain in UCI
@@ -18,9 +17,16 @@ function save_switch_time(switch_time)
   uci:commit("ffda")
 end
 
+function query_remote(remote)
+	local handle = io.popen("wget -T 30 -qO - "..remote)
+	local return_str =  handle:read("*a")
+	handle:close()
+	return return_str
+end
+
 -- Updates target domain by querying a remote director
 function update_domain()
-  local response = json.parse(location.query_remote(ddutil.get_director_url()))
+  local response = json.parse(ddutil.get_director_url())
   if response == nil then
     print("Received invalid response. Exiting.")
     return

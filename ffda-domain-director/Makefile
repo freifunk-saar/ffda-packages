@@ -8,7 +8,7 @@ include $(TOPDIR)/../package/gluon.mk
 
 define Package/ffda-domain-director
   TITLE:=FFDA Domain-Director
-  DEPENDS:=+gluon-core +luaposix +ffda-location
+  DEPENDS:=+gluon-core +luaposix
 endef
 
 define Package/ffda-domain-director/description
