@@ -26,7 +26,7 @@ end
 
 -- Updates target domain by querying a remote director
 function update_domain()
-  local response = json.parse(ddutil.get_director_url())
+  local response = json.parse(query_remote(ddutil.get_director_url()))
   if response == nil then
     print("Received invalid response. Exiting.")
     return
