@@ -34,6 +34,11 @@ function update_domain()
   local domain = response.node_information.domain.name
   local switch_time = response.node_information.domain.switch_time
 
+  if domain == nil then
+    print("Received response without domain. Exiting.")
+    return
+  end
+
   if ddutil.firmware_is_multidomain() then
     if ddutil.check_domain_exists(domain) then
       print("Domain "..domain.." is valid, setting as proposed domain")
