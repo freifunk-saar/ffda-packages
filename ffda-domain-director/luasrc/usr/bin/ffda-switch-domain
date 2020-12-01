@@ -28,15 +28,17 @@ function switch_domain()
   end
 
   if not ddutil.has_switch_time() then
+    print("No switch time set, aborting.")
     return
   end
 
   if not ddutil.is_offline_treshold_reached() then
     if not ddutil.switch_time_passed() then
+      print("Switch time has not passed yet, aborting.")
       return
     end
   else
-    print("Gateways were unreachable for a long time. Assuming domain switch has already happened. Switching now.")
+    print("Gateways were unreachable for a long time. Assuming my clock is wrong and domain switch has already happened. Switching now.")
   end
 
   print("Setting domain.")
